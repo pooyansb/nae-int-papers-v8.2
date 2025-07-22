@@ -1,0 +1,17 @@
+# ⛔ Do not track this secret environment file
+.env
+
+# ⛔ Jupyter checkpoints (not needed in repo)
+.ipynb_checkpoints/
+
+# ⛔ Ignore compiled Python files
+__pycache__/
+*.pyc
+
+# ⛔ System/IDE files
+.DS_Store
+.vscode/
+*.log
+
+# ⛔ Ignore virtual environments if inside project
+venv/

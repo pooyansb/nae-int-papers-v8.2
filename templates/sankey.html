@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PCCT Intelligence – Sankey</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-height: calc(100vh - 40px);
+    }
+    #sankey-frame {
+      width: 100%;
+      height: calc(100vh - 120px);
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home.home') }}">Search</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="{{ url_for('sankey.sankey') }}">Sankey</a>
+      </li>
+    </ul>
+    <iframe id="sankey-frame"
+            src="{{ url_for('static', filename='sankey_22.html') }}"></iframe>
+    <div id="sankey-results" class="mt-3"></div>
+  </div>
+  <script>
+    const frame = document.getElementById('sankey-frame');
+    frame.addEventListener('load', () => {
+      const plot = frame.contentWindow.document.getElementById('plot');
+      plot.on('plotly_click', evt => {
+        let dois = evt.points[0].customdata;
+        if (!Array.isArray(dois)) dois = [dois];
+        const validDois = dois.filter(d => typeof d === 'string' && d.startsWith('http'));
+        if (validDois.length === 0) {
+          alert('No DOI found for this link.');
+          return;
+        }
+        const doiParams = validDois.map(d => `doi=${encodeURIComponent(d)}`).join('&');
+        window.location.href = '/search?' + doiParams;
+      });
+    });
+  </script>
+</body>
+</html>

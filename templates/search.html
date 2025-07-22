@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PCCT Intelligence</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+    }
+    h1 {
+      font-size: 24px;
+      text-align: center;
+      color: #008B8B;
+      position: relative;
+    }
+    h1:after {
+      content: "";
+      display: block;
+      width: 50%;
+      margin: 0.5em auto 1em;
+      border-bottom: 2px solid #008B8B;
+    }
+    h3 {
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85em;
+      margin-bottom: 1em;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: #f2f2f2;
+    }
+    .refs-label {
+      font-weight: bold;
+      font-size: 1em;
+      margin-bottom: 1em;
+    }
+    .text-left {
+      text-align: left !important;
+    }
+    .text-muted { color: #555; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="nav nav-tabs mb-3">
+      <li class="nav-item">
+        <a class="nav-link {% if active_tab=='home' %}active{% endif %}"
+           href="{{ url_for('home.home') }}">Search</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if active_tab=='sankey' %}active{% endif %}"
+           href="{{ url_for('sankey.sankey') }}">Sankey</a>
+      </li>
+    </ul>
+
+    {% if no_dois %}
+      <h1>PCCT Intelligence</h1>
+      <p class="text-left">
+        Please enter a DOI, paper title, or a CT-related query.
+      </p>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
+        Try another query
+      </a>
+
+    {% elif irrelevant %}
+      <h1>PCCT Intelligence</h1>
+      <p class="text-left">
+        Please enter a DOI, paper title, or a CT-related query.
+      </p>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
+        Try another query
+      </a>
+
+    {% elif no_results %}
+      <h1>PCCT Intelligence</h1>
+      <p class="text-left">
+        No studies found on this topic. Please enter another query.
+      </p>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
+        Try another query
+      </a>
+
+    {% elif sankey_refs %}
+      <h1>PCCT Intelligence</h1>
+      <div class="refs-label">References:</div>
+      <div class="text-left">{{ sankey_refs|safe }}</div>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
+        Back to search
+      </a>
+
+    {% else %}
+      <h1>PCCT Intelligence</h1>
+
+      <h3 class="text-left">Question: {{ clarified_query }}</h3>
+      <p class="text-left">{{ response }}</p>
+
+      <h3 class="text-left">Scan and Reconstruction Protocol</h3>
+      <table>
+        <tr><th>Parameter</th><th>Value</th></tr>
+        {% for key, val in protocol.items() %}
+          <tr>
+            <td>{{ key.strip().replace('-', '') }}</td>
+            <td>{{ val }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+
+      <div class="refs-label text-left">References:</div>
+      <div class="text-left">{{ formatted_refs|safe }}</div>
+
+      <p class="text-left">
+        For further insights on this topic, please contact your Siemens Healthineers CT Research Collaborations Manager at your site.
+      </p>
+      <p class="text-muted text-left" style="font-size:0.8em;">
+        <strong>For internal research use only.</strong>
+        Developed by Siemens Healthineers CT R&D. Do not use for clinical decision‑making.
+      </p>
+
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
+        Try another query
+      </a>
+    {% endif %}
+  </div>
+</body>
+</html>
