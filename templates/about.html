@@ -1,38 +1,113 @@
-<!-- templates/about.html -->
-{% extends "base.html" %}
-{% block content %}
-<div class="about-container">
-  <h2 class="section-title">About This Application</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – PCCT Intelligence</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+      font-size: 80%;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 20px;
+      color: #008B8B;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .nav-tabs .nav-link.active {
+      background-color: #e9ecef;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
+    .icon-text-block {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .icon-text-block img {
+      height: 26px;
+      margin-top: 2px;
+    }
+    .icon-text-block .text-content {
+      flex: 1;
+    }
+    .icon-text-block ul {
+      padding-left: 1.2em;
+      margin-top: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
 
-  <p>
-    Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore how these innovations are being evaluated across clinical imaging pathways.
-  </p>
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+          <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 25px;">
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
+          <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 30px;">
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">
+          <img src="{{ url_for('static', filename='info_icon.png') }}" alt="About" style="height: 25px;">
+        </a>
+      </li>
+    </ul>
 
-  <p>
-    This tool draws on 103 high‑impact PCCT studies from our upcoming Radiology review (average journal impact factor 8.15), covering six clinical domains: cardiac, thoracic, neuro, abdominal oncology, musculoskeletal, and pediatrics.
-  </p>
+    <!-- Main Content -->
+    <h1>About This Application</h1>
 
-  <div class="icon-section">
-    <img src="{{ url_for('static', filename='icons/rag.png') }}" alt="RAG Icon" class="icon">
-    <div class="icon-text">
-      The platform uses Retrieval-Augmented Generation (RAG) and Generative AI to allow users to query the reviewed studies by entering a DOI, paper title, or diagnostic task. It returns:
-      <ul class="custom-list">
-        <li>A concise, AI-generated summary</li>
-        <li>Clinical scan and reconstruction protocols</li>
-        <li>Reference details with direct publication links</li>
-      </ul>
+    <p>
+      Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore how these innovations are being evaluated across clinical imaging pathways.
+    </p>
+
+    <p>
+      This tool references a pool of high-impact PCCT studies synthesized in our upcoming <em>Radiology</em> review (mean journal impact factor: 8.15), spanning six clinical domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
+    </p>
+
+    <div class="icon-text-block">
+      <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search">
+      <div class="text-content">
+        <p>
+          Built using Retrieval-Augmented Generation (RAG) and Generative AI, the platform allows users to query the reviewed studies by entering a DOI, paper title, or diagnostic task. It returns:
+        </p>
+        <ul>
+          <li>A concise, AI-generated summary</li>
+          <li>Clinical scan and reconstruction protocols</li>
+          <li>Reference details with direct publication links</li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class="icon-section">
-    <img src="{{ url_for('static', filename='icons/sankey.png') }}" alt="Sankey Icon" class="icon">
-    <div class="icon-text">
-      An integrated Sankey diagram visualizes the connections from PCCT technical features (e.g., ultrahigh spatial resolution, spectral capability) to diagnostic tasks and clinical outcomes. Clicking any stream reveals the set of publications associated with that connection, enabling exploration by feature, task, or outcome.
+    <div class="icon-text-block">
+      <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey">
+      <div class="text-content">
+        <p>
+          An integrated Sankey diagram visualizes the connections from PCCT technical features (e.g., ultrahigh spatial resolution, spectral capability) to diagnostic tasks and clinical outcomes. Clicking any stream reveals the set of publications associated with that connection, enabling exploration by feature, task, or outcome.
+        </p>
+      </div>
     </div>
-  </div>
 
-  <p class="disclaimer">
-    <strong>Note:</strong> This is a research prototype developed by Siemens Healthineers CT R&D. It is not a commercial product and is not intended for clinical use. Despite careful implementation of Retrieval-Augmented Generation (RAG) techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
-  </p>
-</div>
-{% endblock %}
+    <p class="text-muted mt-4" style="font-size: 0.9em;">
+      <strong>Note:</strong> This is a research prototype developed by Siemens Healthineers CT R&D. It is not a commercial product and is not intended for clinical use. Despite careful implementation of Retrieval-Augmented Generation (RAG) techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
+    </p>
+  </div>
+</body>
+</html>
