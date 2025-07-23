@@ -33,10 +33,14 @@
   <div class="container">
     <ul class="nav nav-tabs mb-3">
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('home.home') }}">Search</a>
+        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{{ url_for('home.home') }}">
+          <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 22px;">
+        </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" href="{{ url_for('sankey.sankey') }}">Sankey</a>
+        <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="{{ url_for('sankey.sankey') }}">
+          <img src="{{ url_for('static', filename='sankey_icon.png') }}" alt="Sankey" style="height: 22px;">
+        </a>
       </li>
     </ul>
     <iframe id="sankey-frame"
