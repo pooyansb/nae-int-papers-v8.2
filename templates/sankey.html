@@ -2,106 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About – PCCT Intelligence</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>PCCT Intelligence – Sankey</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
+      font-size: 85%;
       background-color: #f4f4f9;
       padding: 20px;
-      font-size: 80%;
     }
     .container {
-      max-width: 850px;  /* adjusted for about and sankey */
+      max-width: 1000px;
       margin: auto;
       background: #fff;
-      padding: 30px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-height: calc(100vh - 40px);
     }
-    h1 {
-      font-size: 20px;
-      color: #008B8B;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    .section-icon {
-      height: 26px;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    .nav-tabs {
-      margin-bottom: 25px;
-    }
-    .nav-tabs .nav-link.active {
-      background-color: #e9ecef;
-      border-color: #dee2e6 #dee2e6 #fff;
-    }
-    .custom-bullet {
-      padding-left: 34px;
-      text-indent: -20px;
-    }
-    .custom-bullet li {
-      margin-bottom: 6px;
+    #sankey-frame {
+      width: 100%;
+      height: calc(100vh - 120px);
+      border: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
+    {% include '_navbar.html' %}
 
-    <!-- Navigation Tabs -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
-          <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 25px;">
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
-          <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 30px;">
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">
-          <img src="{{ url_for('static', filename='info_icon.png') }}" alt="About" style="height: 25px;">
-        </a>
-      </li>
-    </ul>
-
-    <!-- Main Content -->
-    <h1>About This Application</h1>
-
-    <p>
-      Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore how these innovations are being evaluated across clinical imaging pathways.
-    </p>
-
-    <p>
-      This tool draws from our upcoming <em>Radiology</em> review, which synthesizes 103 high-impact peer-reviewed PCCT studies (mean journal impact factor: 8.15) across six diagnostic domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
-    </p>
-
-    <div class="d-flex align-items-start">
-      <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" class="section-icon mt-1">
-      <div>
-        Built using Retrieval-Augmented Generation (RAG) and Generative AI, the platform allows users to query the reviewed studies by entering a DOI, paper title, or diagnostic task. It returns:
-        <ul class="custom-bullet">
-          <li>A concise, AI-generated summary</li>
-          <li>Clinical scan and reconstruction protocols</li>
-          <li>Reference details with direct publication links</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="d-flex align-items-start mt-3">
-      <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" class="section-icon mt-1">
-      <div>
-        An integrated Sankey diagram visualizes the connections from PCCT technical features (e.g., ultrahigh spatial resolution, spectral capability) to diagnostic tasks and clinical outcomes. Clicking any stream reveals the set of publications associated with that connection, enabling exploration by feature, task, or outcome.
-      </div>
-    </div>
-
-    <p class="text-muted mt-4" style="font-size: 0.9em;">
-      <strong>Note:</strong> This is a research prototype developed by Siemens Healthineers CT R&D. It is not a commercial product and is not intended for clinical use. Despite careful implementation of Retrieval-Augmented Generation (RAG) techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
-    </p>
+    <iframe id="sankey-frame"
+            src="{{ url_for('static', filename='sankey_22.html') }}"></iframe>
+    <div id="sankey-results" class="mt-3"></div>
   </div>
+
+  <script>
+    const frame = document.getElementById('sankey-frame');
+    frame.addEventListener('load', () => {
+      const plot = frame.contentWindow.document.getElementById('plot');
+      if (!plot) return;
+      plot.on('plotly_click', evt => {
+        let dois = evt.points[0].customdata;
+        if (!Array.isArray(dois)) dois = [dois];
+        const validDois = dois.filter(d => typeof d === 'string' && d.startsWith('http'));
+        if (validDois.length === 0) {
+          alert('No DOI found for this link.');
+          return;
+        }
+        const doiParams = validDois.map(d => `doi=${encodeURIComponent(d)}`).join('&');
+        window.location.href = '/search?' + doiParams;
+      });
+    });
+  </script>
 </body>
 </html>
