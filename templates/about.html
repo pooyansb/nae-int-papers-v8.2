@@ -10,6 +10,7 @@
       font-family: Arial, sans-serif;
       background-color: #f4f4f9;
       padding: 20px;
+      font-size: 80%;
     }
     .container {
       max-width: 900px;
@@ -20,7 +21,7 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h1 {
-      font-size: 24px;
+      font-size: 20px;
       color: #008B8B;
       text-align: center;
       margin-bottom: 30px;
@@ -30,10 +31,35 @@
       vertical-align: middle;
       margin-right: 8px;
     }
+    .nav-tabs .nav-link.active {
+      background-color: #e9ecef;
+      border-color: #dee2e6 #dee2e6 #fff;
+    }
   </style>
 </head>
 <body>
   <div class="container">
+
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+          <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 25px;">
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
+          <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 30px;">
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">
+          <img src="{{ url_for('static', filename='info_icon.png') }}" alt="About" style="height: 25px;">
+        </a>
+      </li>
+    </ul>
+
+    <!-- Main Content -->
     <h1>About This Application</h1>
 
     <p>
@@ -41,7 +67,7 @@
     </p>
 
     <p>
-      This tool draws from our upcoming <em>Radiology</em> review, which includes 103 high-impact peer-reviewed PCCT studies (mean journal impact factor: 8.15) selected across six diagnostic domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
+      This tool draws from our upcoming <em>Radiology</em> review, which synthesizes 103 high-impact peer-reviewed PCCT studies (mean journal impact factor: 8.15) across six diagnostic domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
     </p>
 
     <p>
