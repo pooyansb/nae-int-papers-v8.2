@@ -64,6 +64,11 @@
                   <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 33px;">
                 </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">
+                  <img src="{{ url_for('static', filename='info_icon.png') }}" alt="About" style="height: 25px;">
+                </a>
+              </li>
             </ul>
             <h1>PCCT Intelligence</h1>
             <form action="/search" method="post">
