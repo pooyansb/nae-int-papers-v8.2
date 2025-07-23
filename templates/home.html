@@ -47,10 +47,14 @@
             <!-- NAV TABS INSIDE YOUR CARD -->
             <ul class="nav nav-tabs mb-4">
               <li class="nav-item">
-                <a class="nav-link active" href="/">Search</a>
+                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
+                  <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 22px;">
+                </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/sankey">Sankey</a>
+                <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
+                  <img src="{{ url_for('static', filename='sankey_icon.png') }}" alt="Sankey" style="height: 22px;">
+                </a>
               </li>
             </ul>
             <h1>PCCT Intelligence</h1>
