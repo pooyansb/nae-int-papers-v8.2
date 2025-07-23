@@ -9,6 +9,9 @@ import unicodedata
 import logging
 import re
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import url_for
 from transformers import AutoModel, AutoTokenizer
 from config import Config  # ✅ Import config
