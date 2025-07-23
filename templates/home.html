@@ -1,94 +1,76 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>PCCT Intelligence</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-        <style>
-            body {
-                font-family: Arial, sans-serif;
-                background-color: #f4f4f9;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                flex-direction: column;
-            }
-            .container {
-                max-width: 800px;
-                margin: auto;
-                background: #fff;
-                padding: 20px;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                border-radius: 8px;
-            }
-            .btn-primary {
-                display: block;
-                width: 200px;
-                margin: 20px auto;
-                background-color: #008B8B;
-                border-color: #008B8B;
-                color: white;
-            }
-            
-            .btn-primary:hover {
-                background-color: #007373; /* slightly darker on hover */
-                border-color: #007373;
-            }
-            h1 {
-                font-size: 24px;
-                text-align: center;
-                color: #008B8B;
-                position: relative;
-            }
-            h1:after {
-                content: "";
-                display: none;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <!-- NAV TABS INSIDE YOUR CARD -->
-            <ul class="nav nav-tabs mb-4">
-              <li class="nav-item">
-                <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
-                  <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 25px;">
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
-                  <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 33px;">
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% if request.path == '/about' %}active{% endif %}" href="/about">
-                  <img src="{{ url_for('static', filename='info_icon.png') }}" alt="About" style="height: 25px;">
-                </a>
-              </li>
-            </ul>
-            <h1>PCCT Intelligence</h1>
-            <form action="/search" method="post">
-              <input
-                type="text"
-                name="query"
-                class="form-control"
-                style="font-size: 0.85rem;"
-                placeholder="Enter DOI, paper title, or diagnostic task"
-                aria-label="Search by DOI, title or Sankey label"
-                required>
-              <button type="submit" class="btn btn-primary mt-2">Submit</button>
-            </form>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PCCT Intelligence</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      font-size: 85%;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    .btn-primary {
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      background-color: #008B8B;
+      border-color: #008B8B;
+      color: white;
+    }
+    .btn-primary:hover {
+      background-color: #007373;
+      border-color: #007373;
+    }
+    h1 {
+      font-size: 22px;
+      text-align: center;
+      color: #008B8B;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
 
-            <div class="mt-4 text-center text-muted" style="font-size:0.8em;">
-              <p>
-                <strong>For research use only.</strong>  
-                Developed by Siemens Healthineers CT R&amp;D. Do not use for clinical decision‑making.
-              </p>
-            </div>
-        </div>
-    </body>
-    </html>
+    {% include '_navbar.html' %}
+
+    <h1>PCCT Intelligence</h1>
+
+    <form action="/search" method="post">
+      <input
+        type="text"
+        name="query"
+        class="form-control"
+        style="font-size: 0.85rem;"
+        placeholder="Enter DOI, paper title, or diagnostic task"
+        aria-label="Search by DOI, title or Sankey label"
+        required>
+      <button type="submit" class="btn btn-primary mt-2">Submit</button>
+    </form>
+
+    <div class="mt-4 text-center text-muted" style="font-size: 0.8em;">
+      <p>
+        <strong>For research use only.</strong>  
+        Developed by Siemens Healthineers CT R&amp;D. Do not use for clinical decision‑making.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>
