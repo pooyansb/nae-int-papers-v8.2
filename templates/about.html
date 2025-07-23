@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About – PCCT Intelligence</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 24px;
+      color: #008B8B;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section-icon {
+      height: 26px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>About This Application</h1>
+
+    <p>
+      Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore how these innovations are being evaluated across clinical imaging pathways.
+    </p>
+
+    <p>
+      This tool draws from our upcoming <em>Radiology</em> review, which includes 103 high-impact peer-reviewed PCCT studies (mean journal impact factor: 8.15) selected across six diagnostic domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
+    </p>
+
+    <p>
+      <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" class="section-icon">
+      Built using Retrieval-Augmented Generation (RAG) and Generative AI, the platform allows users to query the reviewed studies by entering a DOI, paper title, or diagnostic task. It returns:
+    </p>
+    <ul>
+      <li>A concise, AI-generated summary</li>
+      <li>Clinical scan and reconstruction protocols</li>
+      <li>Reference details with direct publication links</li>
+    </ul>
+
+    <p>
+      <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" class="section-icon">
+      An integrated Sankey diagram visualizes the connections from PCCT technical features (e.g., ultrahigh spatial resolution, spectral capability) to diagnostic tasks and clinical outcomes. Clicking any stream reveals the set of publications associated with that connection, enabling exploration by feature, task, or outcome.
+    </p>
+
+    <p class="text-muted mt-4" style="font-size: 0.9em;">
+      <strong>Note:</strong> This is a research prototype developed by Siemens Healthineers CT R&D. It is not a commercial product and is not intended for clinical use. Despite careful implementation of Retrieval-Augmented Generation (RAG) techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
+    </p>
+  </div>
+</body>
+</html>
