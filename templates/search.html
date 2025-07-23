@@ -1,14 +1,14 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
   <title>PCCT Intelligence</title>
-  <link rel="stylesheet"
-        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <style>
     body {
       font-family: Arial, sans-serif;
+      font-size: 85%;
       background-color: #f4f4f9;
       padding: 20px;
     }
@@ -21,17 +21,16 @@
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     .btn-primary {
-        display: block;
-        width: 200px;
-        margin: 20px auto;
-        background-color: #008B8B;
-        border-color: #008B8B;
-        color: white;
+      display: block;
+      width: 200px;
+      margin: 20px auto;
+      background-color: #008B8B;
+      border-color: #008B8B;
+      color: white;
     }
-    
     .btn-primary:hover {
-        background-color: #007373; /* slightly darker on hover */
-        border-color: #007373;
+      background-color: #007373;
+      border-color: #007373;
     }
     h1 {
       font-size: 24px;
@@ -79,56 +78,27 @@
 </head>
 <body>
   <div class="container">
-    <ul class="nav nav-tabs mb-3">
-      <li class="nav-item">
-        <a class="nav-link {% if active_tab=='home' %}active{% endif %}"
-           href="{{ url_for('home.home') }}">
-          <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search"
-               style="height: 25px;">
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {% if active_tab=='sankey' %}active{% endif %}"
-           href="{{ url_for('sankey.sankey') }}">
-          <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey"
-               style="height: 33px;">
-        </a>
-      </li>
-    </ul>
-    {% if no_dois %}
-      <h1>PCCT Intelligence</h1>
-      <p class="text-left">
-        Please enter a DOI, paper title, or a CT-related query.
-      </p>
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
-        Try another query
-      </a>
+    {% include '_navbar.html' %}
 
-    {% elif irrelevant %}
+    {% if no_dois or irrelevant %}
       <h1>PCCT Intelligence</h1>
       <p class="text-left">
         Please enter a DOI, paper title, or a CT-related query.
       </p>
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
-        Try another query
-      </a>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">Try another query</a>
 
     {% elif no_results %}
       <h1>PCCT Intelligence</h1>
       <p class="text-left">
         No studies found on this topic. Please enter another query.
       </p>
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
-        Try another query
-      </a>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">Try another query</a>
 
     {% elif sankey_refs %}
       <h1>PCCT Intelligence</h1>
       <div class="refs-label">References:</div>
       <div class="text-left">{{ sankey_refs|safe }}</div>
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
-        Back to search
-      </a>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">Back to search</a>
 
     {% else %}
       <h1>PCCT Intelligence</h1>
@@ -158,9 +128,7 @@
         Developed by Siemens Healthineers CT R&D. Do not use for clinical decision‑making.
       </p>
 
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">
-        Try another query
-      </a>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary">Try another query</a>
     {% endif %}
   </div>
 </body>
