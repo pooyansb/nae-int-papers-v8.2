@@ -74,6 +74,9 @@
       text-align: left !important;
     }
     .text-muted { color: #555; }
+    .small-btn-text {
+      font-size: 0.85em !important;
+    }
   </style>
 </head>
 <body>
@@ -103,7 +106,7 @@
     {% else %}
       <h1>PCCT Intelligence</h1>
 
-      <h3 class="text-left">Question: {{ clarified_query }}</h3>
+      <h3 class="text-left">Query: {{ clarified_query }}</h3>
       <p class="text-left">{{ response }}</p>
 
       <h3 class="text-left">Scan and Reconstruction Protocol</h3>
@@ -128,7 +131,7 @@
         Developed by Siemens Healthineers CT R&D. Do not use for clinical decision‑making.
       </p>
 
-      <a href="{{ url_for('home.home') }}" class="btn btn-primary">Try another query</a>
+      <a href="{{ url_for('home.home') }}" class="btn btn-primary small-btn-text">Try another query</a>
     {% endif %}
   </div>
 </body>
