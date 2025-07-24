@@ -75,27 +75,26 @@
     <h1>About This Application</h1>
 
     <p>
-      Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore how these innovations are being evaluated across clinical imaging pathways.
+      Photon-counting CT represents a major advancement in detector technology, enabling intrinsic spectral imaging, smaller detector pixels, and improved contrast and dose efficiency. This application offers an interactive platform to explore the impact of these innovations across clinical imaging tasks.
     </p>
 
     <p>
-      This tool references a pool of high-impact PCCT studies synthesized in our upcoming <em>Radiology</em> review (mean journal impact factor: 8.15), spanning six clinical domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
+      Our database features a curated selection of high-impact PCCT studies (mean IF:8.5) in our upcoming <em>Radiology</em> review article, covering six imaging domains: cardiac, thoracic, neuro, abdominal-oncology, musculoskeletal, and pediatrics.
     </p>
 
     <div class="icon-text-block">
       <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search">
       <div class="text-content">
         <p>
-          Built using Retrieval-Augmented Generation (RAG) and Generative AI, the platform allows users to query the reviewed studies by entering a DOI, paper title, or diagnostic task. It returns:
+          Built using Retrieval-Augmented Generation (RAG), the platform allows users to find relevant studies using a DOI, paper title, or diagnostic task. It returns:
         </p>
-        <ul>
-          <li>A concise, AI-generated summary</li>
-          <li>Clinical scan and reconstruction protocols</li>
-          <li>Reference details with direct publication links</li>
-        </ul>
+        <p style="margin-left: 1.2em;">
+          &ndash; A concise, AI-generated summary<br>
+          &ndash; Clinical scan and reconstruction protocols<br>
+          &ndash; Reference details with direct publication links
+        </p>
       </div>
     </div>
-
     <div class="icon-text-block">
       <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey">
       <div class="text-content">
@@ -106,7 +105,7 @@
     </div>
 
     <p class="text-muted mt-4" style="font-size: 0.9em;">
-      <strong>Note:</strong> This is a research prototype developed by Siemens Healthineers CT R&D. It is not a commercial product and is not intended for clinical use. Despite careful implementation of Retrieval-Augmented Generation (RAG) techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
+      <strong>Note:</strong> This is for research use only and is not intended for clinical use. Despite careful implementation of RAG techniques, the application relies on Generative AI and is subject to misinterpretations. Users are encouraged to validate results directly from the cited publications.
     </p>
   </div>
 </body>
