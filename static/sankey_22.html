@@ -87,7 +87,7 @@
       Plotly.newPlot(
         "plot",
         sankeyData,
-        isMobile ? layoutMobile : layoutDesktop,
+        getResponsiveLayout(),
         { displayModeBar: false, responsive: true }
       );
     }
