@@ -37,8 +37,12 @@
       #plot { width: 900px; height: 540px; }
     }
     @media (max-width: 800px) {
-      .plot-scroll-container { align-items: flex-start; }
-      #plot { width: 700px; height: 400px; }
+      .plot-scroll-container {
+        align-items: flex-start;
+        overflow-y: auto;    /* <--- Add this! */
+        height: 100vh;
+      }
+    #plot { width: 700px; height: 400px; }
     }
   </style>
 </head>
