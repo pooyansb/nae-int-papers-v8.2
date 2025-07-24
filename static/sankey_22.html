@@ -10,52 +10,67 @@
       margin: 0;
       padding: 0;
       height: 100vh;
+      width: 100vw;
       box-sizing: border-box;
-      background: #faf7fc;
+      background: #fff !important; /* Always white background */
+      overflow: hidden;
     }
     .plot-scroll-container {
-      width: 100%;
-      max-height: 82vh;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
       overflow-x: auto;
-      /* Add a little margin if you like */
-      margin: 0 auto;
+      overflow-y: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     #plot {
-      min-width: 700px;   /* Ensures the plot isn't squeezed on mobile */
-      width: 100%;
-      height: 100%;
+      min-width: 700px;
+      width: 1540px;
+      height: 720px;
+      background: #fff;
+      margin: 0 auto;
+      display: block;
+    }
+    @media (max-width: 1200px) {
+      #plot { width: 900px; height: 540px; }
+    }
+    @media (max-width: 800px) {
+      .plot-scroll-container { align-items: flex-start; }
+      #plot { width: 700px; height: 400px; }
     }
   </style>
-
 </head>
 <body>
   <div class="plot-scroll-container">
-    <div id="plot" class="plotly-graph-div"></div>
+    <div id="plot"></div>
   </div>
   <script type="text/javascript">
     window.PlotlyConfig = {MathJaxConfig: 'local'};
-    // Responsive layout function
+
     function getResponsiveLayout() {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      if (w < 800) { // treat all small screens as mobile portrait, threshold can be adjusted
+      if (w < 800) {
+        // Mobile portrait
         return {
           font: { color: "black", size: 11, family: "Calibri" },
           margin: { t: 10, l: 18, r: 12, b: 10 },
-          width: 700,    // fixed min width so users can scroll horizontally if needed
-          height: Math.round(h * 0.6),   // tune as you like
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)"
+          width: 700,
+          height: 400,
+          paper_bgcolor: "#fff",
+          plot_bgcolor: "#fff"
         };
       } else if (w < 1200) {
         // Tablet/small desktop
         return {
           font: { color: "black", size: 13, family: "Calibri" },
           margin: { t: 16, l: 35, r: 25, b: 16 },
-          width: Math.min(900, w * 0.92),
-          height: Math.min(500, h * 0.75),
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)"
+          width: 900,
+          height: 540,
+          paper_bgcolor: "#fff",
+          plot_bgcolor: "#fff"
         };
       } else {
         // Desktop
@@ -64,8 +79,8 @@
           margin: { t: 20, l: 80, r: 20, b: 18 },
           width: 1540,
           height: 720,
-          paper_bgcolor: "rgba(0,0,0,0)",
-          plot_bgcolor: "rgba(0,0,0,0)"
+          paper_bgcolor: "#fff",
+          plot_bgcolor: "#fff"
         };
       }
     }
