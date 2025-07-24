@@ -21,7 +21,13 @@
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       min-height: calc(100vh - 40px);
+    
+      /* NEW: align contents so spacing is consistent */
+      display: flex;
+      flex-direction: column;
+      justify-content: start; /* or 'center' if you want centered height */
     }
+
     #sankey-frame {
       width: 100%;
       height: 65vh;
