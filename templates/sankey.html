@@ -53,13 +53,23 @@
       const plot = frame.contentWindow.document.getElementById('plot');
       if (!plot) return;
       plot.on('plotly_click', evt => {
-        let dois = evt.points[0].customdata;
+        const pointIndex = evt.points[0].pointIndex;
+        const trace = evt.points[0].data;
+      
+        if (!trace.link || !trace.link.customdata || !trace.link.customdata[pointIndex]) {
+          alert('No DOI found for this link.');
+          return;
+        }
+      
+        let dois = trace.link.customdata[pointIndex];
         if (!Array.isArray(dois)) dois = [dois];
+      
         const validDois = dois.filter(d => typeof d === 'string' && d.startsWith('http'));
         if (validDois.length === 0) {
           alert('No DOI found for this link.');
           return;
         }
+      
         const doiParams = validDois.map(d => `doi=${encodeURIComponent(d)}`).join('&');
         window.location.href = '/search?' + doiParams;
       });
