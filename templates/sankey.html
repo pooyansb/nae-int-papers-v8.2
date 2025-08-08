@@ -43,27 +43,26 @@
     {% include '_navbar.html' %}
 
     <iframe id="sankey-frame"
-            src="{{ url_for('static', filename='sankey_22.html') }}"></iframe>
+            src="{{ url_for('static', filename='sankey_28.html') }}"></iframe>
     <div id="sankey-results" class="mt-3"></div>
   </div>
 
   <script>
-    const frame = document.getElementById('sankey-frame');
-    frame.addEventListener('load', () => {
-      const plot = frame.contentWindow.document.getElementById('plot');
-      if (!plot) return;
-      plot.on('plotly_click', evt => {
-        let dois = evt.points[0].customdata;
-        if (!Array.isArray(dois)) dois = [dois];
-        const validDois = dois.filter(d => typeof d === 'string' && d.startsWith('http'));
-        if (validDois.length === 0) {
+    // This runs in the parent and listens for messages from the iframe
+    window.addEventListener('message', (event) => {
+      const { data } = event;
+      if (data?.type === 'doi-click') {
+        const dois = data.dois;
+        if (!Array.isArray(dois) || dois.length === 0) {
           alert('No DOI found for this link.');
           return;
         }
-        const doiParams = validDois.map(d => `doi=${encodeURIComponent(d)}`).join('&');
+  
+        const doiParams = dois.map(d => `doi=${encodeURIComponent(d)}`).join('&');
         window.location.href = '/search?' + doiParams;
-      });
+      }
     });
   </script>
+
 </body>
 </html>
