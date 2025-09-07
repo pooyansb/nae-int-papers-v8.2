@@ -1,10 +1,12 @@
 <!-- templates/_navbar.html -->
 <ul class="nav nav-tabs mb-4">
+  <!--
   <li class="nav-item">
     <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/">
       <img src="{{ url_for('static', filename='search_icon.png') }}" alt="Search" style="height: 25px;">
     </a>
   </li>
+  -->
   <li class="nav-item">
     <a class="nav-link {% if request.path == '/sankey' %}active{% endif %}" href="/sankey">
       <img src="{{ url_for('static', filename='sankey_icon3.png') }}" alt="Sankey" style="height: 25px;">
